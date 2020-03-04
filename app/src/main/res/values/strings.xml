@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">GitHubRepositoryViewer</string>
+    <string name="find_user">Find user</string>
+    <string name="find_repository">Find repository</string>
+</resources>
