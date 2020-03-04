@@ -11,23 +11,21 @@ import retrofit2.converter.gson.GsonConverterFactory
 class RetrofitService {
 
     companion object {
-
-
         private val retrofit = Retrofit.Builder()
                 .baseUrl("https://api.github.com/")
                 .client(OkHttpClient())
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build()
-
         var gitHubApi = retrofit?.create(ApiInterface::class.java)
     }
 
+    fun getUsersRepos(name: String, pageNumber: Int) =
+            gitHubApi?.getUsersReposList(name, pageNumber, REPOS_PER_PAGE)?.map { fromEntity(it) }
 
-    fun getReposList(name: String) = gitHubApi?.let {
-    Log.i(APP_TAG, "getReposList "+ gitHubApi.toString()+ "retrofit" + retrofit.toString())
-        it.getUsersReposList(name, 1, REPOS_PER_PAGE).map { fromEntity(it) }
-    }
+    fun findRepo(name: String, pageNumber: Int) =
+            gitHubApi?.findRepo(name, pageNumber, REPOS_PER_PAGE)?.map { fromEntity(it) }
+
 }
 
 const val REPOS_PER_PAGE = 10

@@ -17,10 +17,5 @@ interface ApiInterface {
     fun findRepo(
             @Query("q") name: String,
             @Query("page") pageNumber: Int,
-            @Query("per_page") perPage: Int): Observable<List<GitHubRepositoryEntity>>
-
-    @GET("repos/{user}/{repo}/contributors")
-    fun getRepoContributors(
-            @Path("user") user: String,
-            @Path("repo") repo: String): Observable<List<GitHubContributor>>
+            @Query("per_page") perPage: Int): Observable<GitHubSearchEntity>
 }

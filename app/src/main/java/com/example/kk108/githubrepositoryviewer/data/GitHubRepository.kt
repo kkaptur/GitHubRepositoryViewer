@@ -12,12 +12,18 @@ fun fromEntity(from: List<GitHubRepositoryEntity?>?): List<GitHubRepository> = f
         repos.map {
             it?.let { repo ->
                 GitHubRepository(
-                        description = repo.description?: EMPTY_STRING,
+                        description = repo.description ?: EMPTY_STRING,
                         name = repo.name ?: EMPTY_STRING
                 )
             }
                     ?: throw Exception("Cannot parse $from").also { Log.e("MAPPING_EXCEPTION", "Cannot parse $from") }
         }
+    } else emptyList()
+} ?: emptyList()
+
+fun fromEntity(from: GitHubSearchEntity?): List<GitHubRepository> = from?.let { searchEntity ->
+    if (searchEntity.repos != null && searchEntity.repos.isNotEmpty()) {
+        fromEntity(searchEntity.repos)
     } else emptyList()
 } ?: emptyList()
 
