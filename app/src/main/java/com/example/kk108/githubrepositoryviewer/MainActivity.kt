@@ -1,8 +1,9 @@
 package com.example.kk108.githubrepositoryviewer
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
+
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStore
 import androidx.lifecycle.ViewModelStoreOwner
@@ -16,7 +17,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-//        var viewModel = ViewModelProvider(this).get(GitHubViewerViewModel::class.java)
+        var viewModel = ViewModelProvider(this).get(GitHubViewerViewModel::class.java)
 
         var repos: List<GitHubRepository>
         search_repo_button.setOnClickListener {
@@ -37,6 +38,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
+
+
 
 
 const val APP_TAG = "GITHUB_VIEWER_LOG"
